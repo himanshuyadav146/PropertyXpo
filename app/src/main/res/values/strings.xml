@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PropertyXpo</string>
+
+    <string name="text_power"> power of cutting edge artificial intelligence technology </string>
 </resources>
