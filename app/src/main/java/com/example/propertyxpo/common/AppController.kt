@@ -1,7 +1,9 @@
 package com.example.propertyxpo.common
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 open class AppController : Application() {
 
     private var mInstance: AppController? = null
