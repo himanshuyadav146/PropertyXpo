@@ -7,6 +7,6 @@ import retrofit2.http.POST
 
 interface LoginService {
     @POST("_api/login_api.php")
-    fun login(@Body data: LoginModel): Call<LoginModel>
+    suspend fun login(@Body data: LoginModel): LoginModel
 
 }
