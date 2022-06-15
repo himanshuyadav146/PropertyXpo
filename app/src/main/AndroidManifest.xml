@@ -23,7 +23,7 @@
         android:theme="@style/Theme.PropertyXpo"
         tools:targetApi="31">
         <activity
-            android:name=".ui.DashBoardActivity"
+            android:name=".ui.dashboard.DashBoardActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -2,4 +2,12 @@
     <string name="app_name">PropertyXpo</string>
 
     <string name="text_power"> power of cutting edge artificial intelligence technology </string>
+    <string name="profile">Profile</string>
+    <string name="hint_dashboard_search_crm_id">CRM ID</string>
+    <string name="hint_dashboard_search_name">Mobile / Name</string>
+    <string name="meet_plan">Meet Plan</string>
+    <string name="call_plan">Call Plan</string>
+    <string name="meet_done">Meet Done</string>
+    <string name="not_met">Not Met</string>
+    <string name="call_held">Call Held</string>
 </resources>

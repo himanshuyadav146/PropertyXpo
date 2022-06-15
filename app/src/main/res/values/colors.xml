@@ -292,4 +292,5 @@
     <color name="error_yellow">#FFDC12</color>
     <color name="error_red">#D42600</color>
     <color name="hint_text_color">#6E6E6E</color>
+    <color name="dashboard_black">#333333</color>
 </resources>
