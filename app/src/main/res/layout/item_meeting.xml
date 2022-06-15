@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="meeting"
+            type="com.example.propertyxpo.ui.dashboard.models.Meeting" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:strokeColor="@color/colorGrey8d"
+        app:strokeWidth="1dp"
+        android:elevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardPreventCornerOverlap="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/txtAgentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meeting.agent}"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meeting.meetComment}"
+                app:layout_constraintTop_toBottomOf="@id/txtAgentName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
