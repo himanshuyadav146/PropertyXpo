@@ -8,11 +8,8 @@ import com.example.propertyxpo.base.BaseViewModel
 import com.example.propertyxpo.common.AppController
 import com.example.propertyxpo.data.Result
 import com.example.propertyxpo.data.login.LoginRepository
-import com.example.propertyxpo.ui.DashBoardActivity
+import com.example.propertyxpo.ui.dashboard.DashBoardActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor() : BaseViewModel() {
@@ -24,6 +21,18 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
 
     fun onButtonClicked() {
         loginObject.value?.let { postLogin(it) }
+    }
+
+    fun checkForLogin(){
+        if(loginRepository.isUserLoggedIn())
+            navigateToDashboard()
+    }
+
+    private fun navigateToDashboard() {
+        val intent =
+            Intent(AppController.applicationContext(), DashBoardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        AppController.applicationContext().startActivity(intent)
     }
 
 
@@ -39,10 +48,7 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    val intent =
-                        Intent(AppController.applicationContext(), DashBoardActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    AppController.applicationContext().startActivity(intent)
+                   navigateToDashboard()
                 }
                 is Result.Failed ->{
                     Toast.makeText(AppController.applicationContext(), "Error", Toast.LENGTH_LONG)

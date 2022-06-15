@@ -10,4 +10,8 @@
         <item name="colorControlActivated">@color/color1</item>
         <item name="colorControlHighlight">@color/color1</item>
     </style>
+
+    <style name="Widget.MaterialComponents.Chip.Action.Checkable" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:checkable">true</item>
+    </style>
 </resources>

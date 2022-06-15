@@ -18,5 +18,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         bindView(R.layout.activity_login)
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel
+        viewModel.checkForLogin()
     }
 }

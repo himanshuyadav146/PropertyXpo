@@ -1,9 +1,343 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DashBoardActivity">
+<layout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <import type="com.example.propertyxpo.data.Result.Loading" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.propertyxpo.ui.dashboard.DashboardViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f0f0f0"
+        tools:context=".ui.dashboard.DashBoardActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/dashboard" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dashboard_black"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="8dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.SearchView
+                            android:id="@+id/searchView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:iconifiedByDefault="false"
+                            app:queryHint="@{viewModel.searchHint}" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <RadioGroup
+                        android:id="@+id/rgpSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@id/rdbCid"
+                        android:onCheckedChanged="@{(group, checkId)-> viewModel.onSearchTypeChanged(checkId)}"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/cardSearch">
+
+                        <RadioButton
+                            android:id="@+id/rdbCid"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_gray"
+                            android:text="@string/hint_dashboard_search_crm_id" />
+
+                        <RadioButton
+                            android:id="@+id/rdbName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_gray"
+                            android:text="@string/hint_dashboard_search_name" />
+                    </RadioGroup>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/hzScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    app:layout_constraintTop_toBottomOf="@id/constraintTop">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chpGrpMeetCategory"
+                        style="@style/Widget.MaterialComponents.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:checkedChip="@id/chipMeetPlan"
+                        app:itemSpacing="4dp"
+                        app:layout_constraintTop_toBottomOf="@id/rgpSearch"
+                        app:selectionRequired="true"
+                        app:singleLine="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMeetPlan"
+                            style="@style/Widget.MaterialComponents.Chip.Action.Checkable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/meet_plan"
+                            app:checkedIcon="@null"
+                            app:chipIcon="@drawable/ic_call" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCallPlan"
+                            style="@style/Widget.MaterialComponents.Chip.Action.Checkable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_plan"
+                            app:checkedIcon="@null"
+                            app:chipIcon="@drawable/ic_call" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMeetDone"
+                            style="@style/Widget.MaterialComponents.Chip.Action.Checkable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/meet_done"
+                            app:checkedIcon="@null"
+                            app:chipIcon="@drawable/ic_call" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipNotMet"
+                            style="@style/Widget.MaterialComponents.Chip.Action.Checkable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/not_met"
+                            app:checkedIcon="@null"
+                            app:chipIcon="@drawable/ic_call" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCallHeld"
+                            style="@style/Widget.MaterialComponents.Chip.Action.Checkable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_held"
+                            app:checkedIcon="@null"
+                            app:chipIcon="@drawable/ic_call" />
+
+                        <!--                    <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/cardMeetPlan"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checkable="true"
+                                                app:checkedIconGravity="TOP_END"
+                                                app:checkedIconMargin="4dp"
+                                                app:checkedIcon="@drawable/ic_twotone_check_circle_24"
+                                                app:checkedIconSize="8dp">
+
+                                                <androidx.appcompat.widget.LinearLayoutCompat
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="24dp"
+                                                        android:layout_height="24dp"
+                                                        android:src="@drawable/ic_call" />
+
+                                                    <com.google.android.material.textview.MaterialTextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/meet_plan" />
+                                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/cardCallPlan"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checkable="true"
+                                                app:checkedIconGravity="TOP_END"
+                                                app:checkedIconMargin="4dp"
+                                                app:checkedIcon="@drawable/ic_twotone_check_circle_24"
+                                                app:checkedIconSize="8dp">
+
+                                                <androidx.appcompat.widget.LinearLayoutCompat
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="24dp"
+                                                        android:layout_height="24dp"
+                                                        android:src="@drawable/ic_call" />
+
+                                                    <com.google.android.material.textview.MaterialTextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/call_plan" />
+                                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/cardMeetDone"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checkable="true"
+                                                app:checkedIconGravity="TOP_END"
+                                                app:checkedIconMargin="4dp"
+                                                app:checkedIcon="@drawable/ic_twotone_check_circle_24"
+                                                app:checkedIconSize="8dp">
+
+                                                <androidx.appcompat.widget.LinearLayoutCompat
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="24dp"
+                                                        android:layout_height="24dp"
+                                                        android:src="@drawable/ic_call" />
+
+                                                    <com.google.android.material.textview.MaterialTextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/meet_done" />
+                                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/cardNotMet"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checkable="true"
+                                                app:checkedIconGravity="TOP_END"
+                                                app:checkedIconMargin="4dp"
+                                                app:checkedIcon="@drawable/ic_twotone_check_circle_24"
+                                                app:checkedIconSize="8dp">
+
+                                                <androidx.appcompat.widget.LinearLayoutCompat
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="24dp"
+                                                        android:layout_height="24dp"
+                                                        android:src="@drawable/ic_call" />
+
+                                                    <com.google.android.material.textview.MaterialTextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/not_met" />
+                                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                            </com.google.android.material.card.MaterialCardView>
+
+                                            <com.google.android.material.card.MaterialCardView
+                                                android:id="@+id/cardCallHeld"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checkable="true"
+                                                app:checkedIconGravity="TOP_END"
+                                                app:checkedIconMargin="4dp"
+                                                app:checkedIcon="@drawable/ic_twotone_check_circle_24"
+                                                app:checkedIconSize="8dp">
+
+                                                <androidx.appcompat.widget.LinearLayoutCompat
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="24dp"
+                                                        android:layout_height="24dp"
+                                                        android:src="@drawable/ic_call" />
+
+                                                    <com.google.android.material.textview.MaterialTextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="@string/call_held" />
+                                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                            </com.google.android.material.card.MaterialCardView>-->
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMeeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{viewModel.meetingAdapter}"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/hzScroll" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="@{viewModel.apiState instanceof Loading ? View.VISIBLE : View.GONE }"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/rvMeeting"
+                    app:layout_constraintStart_toStartOf="@id/rvMeeting"
+                    app:layout_constraintTop_toBottomOf="@id/hzScroll" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_twotone_schedule_24"
+            app:layout_anchor="@id/scrollContent"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+            app:useCompatPadding="true" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
