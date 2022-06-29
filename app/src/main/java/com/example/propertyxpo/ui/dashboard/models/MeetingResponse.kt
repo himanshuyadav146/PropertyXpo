@@ -1,9 +1,12 @@
 package com.example.propertyxpo.ui.dashboard.models
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+data class MeetingResponse(@SerializedName("list") val meetings: List<Meeting>) : Parcelable
 
-data class MeetingResponse(val meetings: List<Meeting>)
-
+@Parcelize
 data class Meeting(
     @SerializedName("agent")
     val agent: String?,
@@ -27,4 +30,4 @@ data class Meeting(
     val pDate: String?,
     @SerializedName("project")
     val project: String?
-)
+) : Parcelable

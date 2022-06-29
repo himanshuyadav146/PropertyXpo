@@ -1,21 +1,26 @@
 package com.example.propertyxpo.ui.dashboard
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.propertyxpo.R
+import com.example.propertyxpo.base.BaseViewModel
 import com.example.propertyxpo.common.AppController
+import com.example.propertyxpo.common.StringConstants
+import com.example.propertyxpo.common.models.Event
 import com.example.propertyxpo.data.Result
 import com.example.propertyxpo.data.meeting.MeetingRepository
 import com.example.propertyxpo.ui.dashboard.adapters.MeetingAdapter
 import com.example.propertyxpo.ui.dashboard.models.Meeting
+import com.example.propertyxpo.ui.dashboard.models.MeetingResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor() : ViewModel() {
+class DashboardViewModel @Inject constructor() : BaseViewModel() {
     @Inject lateinit var meetingRepository:MeetingRepository
 
-    val meetingAdapter = MeetingAdapter()
+    val meetingAdapter = MeetingAdapter(this)
 
     val searchHint = MutableLiveData(AppController.applicationContext().getString(R.string.hint_dashboard_search_crm_id))
 
@@ -32,7 +37,8 @@ class DashboardViewModel @Inject constructor() : ViewModel() {
                 when(it){
                     is Result.Loading->{}
                     is Result.Success->{
-                        meetingAdapter.updateMeetings((it.data as List<Meeting>))
+                        val meetingResponse = it.data as MeetingResponse
+                        meetingAdapter.updateMeetings((meetingResponse.meetings))
                     }
                     is Result.Failed ->{
 
@@ -60,6 +66,18 @@ class DashboardViewModel @Inject constructor() : ViewModel() {
             AppController.applicationContext().getString(R.string.hint_dashboard_search_name)
     }
 
+    fun onClick(type: String, meeting: Meeting){
+        when(type){
+            STATUS ->{
+                singleEventLiveData.value = Event.ClickEvent(type, Bundle().apply {
+                    putParcelable(StringConstants.MEETING_DATA, meeting)
+                })
+            }
+        }
+
+
+    }
+
     fun doLogout(){
         meetingRepository.doLogout()
     }
@@ -70,5 +88,9 @@ class DashboardViewModel @Inject constructor() : ViewModel() {
         const val MEET_DONE = "meet_done"
         const val MEET_NOT_DONE = "meet_not_done"
         const val CALL_DONE = "call_done"
+
+        /**
+         * CTA types*/
+        const val STATUS = "cta_status"
     }
 }
