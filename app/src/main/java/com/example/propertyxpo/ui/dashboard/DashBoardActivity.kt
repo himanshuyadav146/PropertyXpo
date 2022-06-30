@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.propertyxpo.R
 import com.example.propertyxpo.base.BaseActivity
+import com.example.propertyxpo.common.StringConstants
+import com.example.propertyxpo.common.models.Event
 import com.example.propertyxpo.databinding.ActivityDashBoardBinding
+import com.example.propertyxpo.ui.dashboard.models.Meeting
 import com.example.propertyxpo.ui.login.view.LoginActivity
-import com.google.android.material.card.MaterialCardView
+import com.example.propertyxpo.ui.meeting.MeetingStatusUpdateDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +31,13 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
 
         setSupportActionBar(dataBinding.toolbar)
 
+        addClickListeners()
+        addObservers()
+
+        initDashboard()
+    }
+
+    private fun addClickListeners() {
         dataBinding.fabAdd.setOnClickListener {
             dataBinding.fabAdd.isExpanded = !dataBinding.fabAdd.isExpanded
         }
@@ -35,13 +45,36 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
         dataBinding.chpGrpMeetCategory.setOnCheckedStateChangeListener { group, checkedIds ->
             viewModel.onMeetingTypeChanged(checkedIds.firstOrNull())
         }
-        
+
         dataBinding.fabAdd.setOnClickListener {
             Toast.makeText(this, "Add Meet/Call Plan", Toast.LENGTH_SHORT).show()
         }
+    }
 
-        initDashboard()
+    private fun addObservers() {
+        viewModel.singleEventLiveData.observe(this) {
+            when (it) {
+                is Event.ClickEvent -> {
+                    when (it.type) {
+                        DashboardViewModel.STATUS -> {
 
+                            AlertDialog.Builder(this)
+                                .setItems(R.array.array_meeting_status_choices) { _, i ->
+                                    openMeetingCompleteScreen(
+                                        it.bundle?.getParcelable(StringConstants.MEETING_DATA),
+                                        when (i) {
+                                            0 -> "held"
+                                            1 -> "not held"
+                                            else -> "confirmed"
+                                        }
+                                    )
+                                }.show()
+                        }
+                    }
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun initDashboard() {
@@ -56,17 +89,26 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         AlertDialog.Builder(this).setTitle("Logout")
             .setMessage("Do you want to logout?")
-            .setPositiveButton("Yes"){ _: DialogInterface, _: Int ->
+            .setPositiveButton("Yes") { _: DialogInterface, _: Int ->
                 viewModel.doLogout()
                 openLoginScreen()
             }
-            .setNegativeButton("No",null)
+            .setNegativeButton("No", null)
             .show()
         return super.onOptionsItemSelected(item)
     }
 
     private fun openLoginScreen() {
-        startActivity(Intent(this,LoginActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+        startActivity(
+            Intent(this, LoginActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
+    }
+
+    private fun openMeetingCompleteScreen(meeting: Meeting?, status: String) {
+        meeting?.let {
+            MeetingStatusUpdateDialogFragment.instance(it, status)
+                .show(supportFragmentManager, "meetingComplete")
+        }
     }
 }

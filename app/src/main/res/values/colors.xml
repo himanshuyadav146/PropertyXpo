@@ -11,10 +11,17 @@
     <color name="color_purple">#BB266A</color>
 
 
+    <color name="primaryColor">#333333</color>
+    <color name="primaryLightColor">#5c5c5c</color>
+    <color name="primaryDarkColor">#0c0c0c</color>
+    <color name="secondaryColor">#d88f3c</color>
+    <color name="secondaryLightColor">#ffbf6a</color>
+    <color name="secondaryDarkColor">#a26108</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
 
-
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#181818</color>
+    <color name="colorPrimary">#333333</color>
+    <color name="colorPrimaryDark">#0c0c0c</color>
     <color name="colorGrey8D">#8D8D8D</color>
     <color name="colorGrey5c">#5c5c5c</color>
     <color name="colorGreyc5">#c5c5c5</color>
@@ -22,8 +29,8 @@
     <color name="colorGreyEA">#EAEAEA</color>
     <color name="colorGreyEC">#ECECEC</color>
     <color name="colorGreyE1">#e1e1e1</color>
-    <color name="colorCTA">#DA1C5C</color>
-    <color name="colorAccentLight">#fc9aad</color>
+    <color name="colorCTA">#d88f3c</color>
+    <color name="colorAccentLight">#ffbf6a</color>
     <color name="colorAccent">@color/colorCTA</color>
     <color name="colorGrey4A">#4A4A4A</color>
     <color name="colorGrey4a">#4a4a4a</color>
@@ -293,4 +300,5 @@
     <color name="error_red">#D42600</color>
     <color name="hint_text_color">#6E6E6E</color>
     <color name="dashboard_black">#333333</color>
+    <color name="background_meeting_pink">#F14258</color>
 </resources>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.propertyxpo.ui.dashboard.DashboardViewModel"/>
+
+        <variable
+            name="viewModel"
+            type="com.example.propertyxpo.ui.dashboard.DashboardViewModel" />
 
         <variable
             name="meeting"
@@ -14,10 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        app:strokeColor="@color/colorGrey8d"
-        app:strokeWidth="1dp"
         android:elevation="4dp"
-        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/background_meeting_pink"
+        app:cardCornerRadius="16dp"
         app:cardPreventCornerOverlap="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,17 +32,106 @@
 
             <TextView
                 android:id="@+id/txtAgentName"
+                style="@style/TextAppearance.PropertyX.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{meeting.agent}"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Agent Name" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                style="@style/TextAppearance.PropertyX.SubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meeting.PDate}"
+                app:layout_constraintTop_toBottomOf="@id/txtAgentName"
+                tools:text="15 Jun 2022" />
+
+            <TextView
+                android:id="@+id/txtMaskedNumber"
+                style="@style/TextAppearance.PropertyX.SubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meeting.nomAsked}"
+                app:layout_constraintTop_toBottomOf="@id/txtTime"
+                tools:text="********567"/>
 
             <TextView
                 android:id="@+id/txtComment"
+                style="@style/TextAppearance.PropertyX.SubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{meeting.meetComment}"
-                app:layout_constraintTop_toBottomOf="@id/txtAgentName" />
+                app:layout_constraintTop_toBottomOf="@id/txtMaskedNumber"
+                tools:text="Meeting is successfully done"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/dividerButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:dividerColor="@color/white_gray"
+                app:layout_constraintTop_toBottomOf="@id/txtComment"/>
+
+
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                app:layout_constraintStart_toEndOf="@id/btnAdd"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnWhatsApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                app:layout_constraintStart_toEndOf="@id/btnWishlist"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                app:layout_constraintStart_toEndOf="@id/btnWhatsApp"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                app:layout_constraintStart_toEndOf="@id/btnDetail"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btnStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorTransparent"
+                android:onClick="@{(v)->viewModel.onClick(DashboardViewModel.STATUS,meeting)}"
+                app:layout_constraintStart_toEndOf="@id/btnMessage"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
