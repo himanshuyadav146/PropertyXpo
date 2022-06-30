@@ -14,4 +14,23 @@
     <style name="Widget.MaterialComponents.Chip.Action.Checkable" parent="Widget.MaterialComponents.Chip.Action">
         <item name="android:checkable">true</item>
     </style>
+
+    <style name="TextAppearance.PropertyX.Title" parent="">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">16sp</item>
+        <item name="autoSizeMinTextSize">14sp</item>
+        <item name="autoSizeStepGranularity">0.5sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.PropertyX.SubTitle" parent="">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">14sp</item>
+        <item name="autoSizeMinTextSize">12sp</item>
+        <item name="autoSizeStepGranularity">0.5sp</item>
+    </style>
 </resources>

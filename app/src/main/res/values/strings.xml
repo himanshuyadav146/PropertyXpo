@@ -10,4 +10,9 @@
     <string name="meet_done">Meet Done</string>
     <string name="not_met">Not Met</string>
     <string name="call_held">Call Held</string>
+    <string name="complete">Complete</string>
+    <string name="replan">Replan</string>
+    <string name="title_lead_id">Lead Id</string>
+    <string name="title_comment">Comment</string>
+    <string name="submit">Submit</string>
 </resources>
