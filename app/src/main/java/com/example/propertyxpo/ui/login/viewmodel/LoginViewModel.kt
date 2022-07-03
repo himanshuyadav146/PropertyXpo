@@ -19,6 +19,8 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
     }
     @Inject lateinit var loginRepository :LoginRepository
 
+    val apiState = MutableLiveData<Result<Any>>(Result.Success())
+
     fun onButtonClicked() {
         loginObject.value?.let { postLogin(it) }
     }
@@ -39,6 +41,7 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
     private fun postLogin(objLogin: LoginModel) {
 
         loginRepository.doLogin(objLogin).observeForever {
+            apiState.value = it
             when(it){
                 is Result.Loading->{}
                 is Result.Success->{
