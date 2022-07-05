@@ -86,9 +86,9 @@
                 app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnWishlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
+                android:src="@drawable/ic_impclient_01"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
                 app:layout_constraintStart_toEndOf="@id/btnAdd"

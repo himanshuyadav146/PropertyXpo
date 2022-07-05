@@ -2,4 +2,5 @@
 <resources>
 
     <dimen name="font_9">9sp</dimen>
+    <dimen name="dp30">30dp</dimen>
 </resources>
