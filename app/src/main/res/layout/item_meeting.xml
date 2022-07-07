@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{meeting.nomAsked}"
                 app:layout_constraintTop_toBottomOf="@id/txtTime"
-                tools:text="********567"/>
+                tools:text="********567" />
 
             <TextView
                 android:id="@+id/txtComment"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{meeting.meetComment}"
                 app:layout_constraintTop_toBottomOf="@id/txtMaskedNumber"
-                tools:text="Meeting is successfully done"/>
+                tools:text="Meeting is successfully done" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/dividerButtons"
@@ -72,65 +72,96 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:dividerColor="@color/white_gray"
-                app:layout_constraintTop_toBottomOf="@id/txtComment"/>
+                app:layout_constraintTop_toBottomOf="@id/txtComment" />
 
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_add"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintEnd_toStartOf="@+id/btnWishlist"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
+
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnWishlist"
                 android:layout_width="@dimen/dp30"
                 android:layout_height="@dimen/dp30"
-                android:src="@drawable/ic_impclient_01"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
-                app:layout_constraintStart_toEndOf="@id/btnAdd"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_impclient_01"
+                app:layout_constraintEnd_toStartOf="@+id/btnWhatsApp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnAdd"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
+
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnWhatsApp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
-                app:layout_constraintStart_toEndOf="@id/btnWishlist"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_whatsapp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDetail"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnWishlist"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
+
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
-                app:layout_constraintStart_toEndOf="@id/btnWhatsApp"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_view"
+                app:layout_constraintEnd_toStartOf="@+id/btnMessage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnWhatsApp"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
+
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
-                app:layout_constraintStart_toEndOf="@id/btnDetail"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_messages"
+                app:layout_constraintEnd_toStartOf="@+id/btnStatus"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnDetail"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/btnStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twotone_add_circle_24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorTransparent"
                 android:onClick="@{(v)->viewModel.onClick(DashboardViewModel.STATUS,meeting)}"
-                app:layout_constraintStart_toEndOf="@id/btnMessage"
-                app:layout_constraintTop_toBottomOf="@id/dividerButtons"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_smile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnMessage"
+                app:layout_constraintTop_toBottomOf="@id/dividerButtons" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
