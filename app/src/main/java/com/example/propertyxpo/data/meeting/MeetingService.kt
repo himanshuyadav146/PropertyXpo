@@ -40,6 +40,7 @@ interface MeetingService {
     ): MeetingResponse
 
     @POST("_api/metstatus_update.php")
-    suspend fun postMeetingStatus(@Body meetingCompleteRequest: MeetingCompleteRequest,
-                                  @Header("Authorization") bearerToken: String):LinkedTreeMap<String,Any>
+    suspend fun postMeetingStatus(
+        @Body meetingCompleteRequest: MeetingCompleteRequest,
+        @Header("Authorization") bearerToken: String):LinkedTreeMap<String,Any>
 }
