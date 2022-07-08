@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/drawable/ic_baseline_engineering_24.xml" value="0.1605" />
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/drawable/ic_call.xml" value="0.1965" />
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/drawable/ic_twotone_add_circle_24.xml" value="0.1" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/layout/fragment_meeting_status_update.xml" value="0.33" />
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/layout/item_meeting.xml" value="0.1334033613445378" />
         <entry key="..\:/Users/Dell/StudioProjects/Others/PropertyXpo/app/src/main/res/menu/dashboard.xml" value="0.203125" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1015" />
         <entry key="app/src/main/res/drawable/ic_impclient_01.xml" value="0.1065" />
         <entry key="app/src/main/res/drawable/ic_twotone_add_circle_24.xml" value="0.1065" />
         <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.15885416666666666" />
@@ -20,7 +22,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_meeting_complete.xml" value="0.1793478260869565" />
         <entry key="app/src/main/res/layout/fragment_meeting_status_update.xml" value="0.1793478260869565" />
-        <entry key="app/src/main/res/layout/item_meeting.xml" value="0.13949275362318841" />
+        <entry key="app/src/main/res/layout/item_meeting.xml" value="0.33" />
       </map>
     </option>
   </component>
