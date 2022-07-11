@@ -23,31 +23,31 @@ class MeetingRepository @Inject constructor(
 
     val userId = "1"
 
-    fun fetchMeetingPlan(type: String): LiveData<Result<Any>> {
+    fun fetchMeetingPlan(type: String, selectedDateString: String): LiveData<Result<Any>> {
         return flow {
             emit(Result.Loading)
             val meetingResponse = when (type) {
                 DashboardViewModel.MEET_PLAN -> meetingService.getMeetingPlan(
-                    MeetingRequestModel(userId),
+                    MeetingRequestModel(userId, selectedDateString),
                     bearerToken
                 )
                 DashboardViewModel.CALL_PLAN -> meetingService.getCallPlan(
-                    MeetingRequestModel(userId),
+                    MeetingRequestModel(userId, selectedDateString),
                     bearerToken
                 )
                 DashboardViewModel.MEET_DONE -> meetingService.getMeetingDone(
-                    MeetingRequestModel(userId),
+                    MeetingRequestModel(userId, selectedDateString),
                     bearerToken
                 )
                 DashboardViewModel.MEET_NOT_DONE -> meetingService.getMeetingNotDone(
-                    MeetingRequestModel(userId),
+                    MeetingRequestModel(userId, selectedDateString),
                     bearerToken
                 )
                 DashboardViewModel.CALL_DONE -> meetingService.getCallDone(
-                    MeetingRequestModel(userId),
+                    MeetingRequestModel(userId, selectedDateString),
                     bearerToken
                 )
-                else -> meetingService.getMeetingPlan(MeetingRequestModel(userId), bearerToken)
+                else -> meetingService.getMeetingPlan(MeetingRequestModel(userId, selectedDateString), bearerToken)
 
             }
             emit(Result.Success(meetingResponse))
