@@ -16,6 +16,7 @@ import com.example.propertyxpo.databinding.ActivityDashBoardBinding
 import com.example.propertyxpo.ui.dashboard.models.Meeting
 import com.example.propertyxpo.ui.login.view.LoginActivity
 import com.example.propertyxpo.ui.meeting.MeetingStatusUpdateDialogFragment
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
             dataBinding.fabAdd.isExpanded = !dataBinding.fabAdd.isExpanded
         }
 
-        dataBinding.chpGrpMeetCategory.setOnCheckedStateChangeListener { group, checkedIds ->
+        dataBinding.chpGrpMeetCategory.setOnCheckedStateChangeListener { _, checkedIds ->
             viewModel.onMeetingTypeChanged(checkedIds.firstOrNull())
         }
 
@@ -69,6 +70,21 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
                                         }
                                     )
                                 }.show()
+                        }
+                    }
+                }
+                is Event.UiEvent -> {
+                    when(it.type){
+                        DashboardViewModel.CALENDAR -> {
+                            val selectedDateLong = it.bundle?.getLong(DashboardViewModel.DATA_PARAM_LABEL)
+                            val datePicker = MaterialDatePicker.Builder.datePicker()
+                                .setSelection(selectedDateLong)
+                                .build()
+
+                            datePicker.addOnPositiveButtonClickListener { selectedDate ->
+                                viewModel.setSelectedDate(selectedDate)
+                            }
+                            datePicker.show(supportFragmentManager, "calendar")
                         }
                     }
                 }

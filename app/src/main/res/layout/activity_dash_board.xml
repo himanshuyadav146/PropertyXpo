@@ -7,6 +7,10 @@
 
         <import type="android.view.View" />
 
+        <import type="com.example.propertyxpo.ui.dashboard.DashboardViewModel"/>
+
+        <import type="com.example.propertyxpo.ui.dashboard.models.Meeting"/>
+
         <variable
             name="viewModel"
             type="com.example.propertyxpo.ui.dashboard.DashboardViewModel" />
@@ -68,16 +72,17 @@
 
                     <RadioGroup
                         android:id="@+id/rgpSearch"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checkedButton="@id/rdbCid"
                         android:onCheckedChanged="@{(group, checkId)-> viewModel.onSearchTypeChanged(checkId)}"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="@id/cardSearch"
                         app:layout_constraintTop_toBottomOf="@id/cardSearch">
 
                         <RadioButton
                             android:id="@+id/rdbCid"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/white_gray"
@@ -85,12 +90,29 @@
 
                         <RadioButton
                             android:id="@+id/rdbName"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/white_gray"
                             android:text="@string/hint_dashboard_search_name" />
                     </RadioGroup>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardCalendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:onClick="@{(v)->viewModel.onClick(DashboardViewModel.CALENDAR, (Meeting) null)}"
+                        app:cardCornerRadius="16dp"
+                        app:layout_constraintEnd_toEndOf="@id/cardSearch"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txtCurrentDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            dateLong="@{viewModel.selectedDateLong}"
+                            tools:text="11 Jun, 22"/>
+                    </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <HorizontalScrollView
