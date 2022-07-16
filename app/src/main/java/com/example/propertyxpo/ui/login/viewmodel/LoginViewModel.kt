@@ -1,6 +1,5 @@
 package com.example.propertyxpo.ui.login.viewmodel
 
-import com.example.propertyxpo.ui.login.model.LoginModel
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -9,15 +8,18 @@ import com.example.propertyxpo.common.AppController
 import com.example.propertyxpo.data.Result
 import com.example.propertyxpo.data.login.LoginRepository
 import com.example.propertyxpo.ui.dashboard.DashBoardActivity
+import com.example.propertyxpo.ui.login.model.LoginModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+
 @HiltViewModel
 class LoginViewModel @Inject constructor() : BaseViewModel() {
 
     var loginObject = MutableLiveData<LoginModel?>().apply {
-        value = LoginModel("", -1, "", "", "", "")
+        value = LoginModel("", -1, "", "", "", "", "")
     }
-    @Inject lateinit var loginRepository :LoginRepository
+    @Inject
+    lateinit var loginRepository: LoginRepository
 
     val apiState = MutableLiveData<Result<Any>>(Result.Success())
 
@@ -25,8 +27,8 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
         loginObject.value?.let { postLogin(it) }
     }
 
-    fun checkForLogin(){
-        if(loginRepository.isUserLoggedIn())
+    fun checkForLogin() {
+        if (loginRepository.isUserLoggedIn())
             navigateToDashboard()
     }
 
@@ -42,19 +44,17 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
 
         loginRepository.doLogin(objLogin).observeForever {
             apiState.value = it
-            when(it){
-                is Result.Loading->{}
-                is Result.Success->{
+            when (it) {
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    navigateToDashboard()
+                }
+                is Result.Failed -> {
                     Toast.makeText(
                         AppController.applicationContext(),
-                        "Login Succesfully",
+                        it.data.toString(),
                         Toast.LENGTH_LONG
-                    ).show()
-
-                   navigateToDashboard()
-                }
-                is Result.Failed ->{
-                    Toast.makeText(AppController.applicationContext(), "Error", Toast.LENGTH_LONG)
+                    )
                         .show()
                 }
             }

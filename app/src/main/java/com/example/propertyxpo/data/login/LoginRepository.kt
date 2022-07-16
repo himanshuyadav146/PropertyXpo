@@ -21,8 +21,11 @@ class LoginRepository @Inject constructor(private val loginService: LoginService
             val loginResponse = loginService.login(data)
             if("Successful login.".equals(loginResponse.message, true)){
                 appSharedPreferencesManager.putValueToSharedPref(StringConstants.LOGIN_TOKEN, loginResponse.jwt)
+                emit(Result.Success(loginResponse))
+            }else{
+                emit(Result.Failed(loginResponse.errorMessage))
             }
-            emit(Result.Success(loginResponse))
+
         }.asLiveData(Dispatchers.IO)
     }
 }
