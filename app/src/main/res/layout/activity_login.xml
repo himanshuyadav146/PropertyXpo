@@ -34,7 +34,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="468dp"
                 android:padding="20dp">
 
                 <ImageView
@@ -83,8 +83,8 @@
                         android:layout_height="wrap_content"
                         android:enabled="true"
                         android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:text="@={viewModel.loginObject.login_id}"/>
+                        android:text="@={viewModel.loginObject.login_id}"
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,10 +108,10 @@
                         android:layout_height="wrap_content"
                         android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:enabled="true"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
                         android:inputType="textPassword"
-                        android:text="@={viewModel.loginObject.password}"/>
+                        android:singleLine="true"
+                        android:text="@={viewModel.loginObject.password}"
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,10 +120,10 @@
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:backgroundTint="#1E4B4E"
-                    android:text="Login"
                     android:onClick="@{(v)->viewModel.onButtonClicked()}"
+                    android:text="Login"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutPWD" />
@@ -131,7 +131,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal"
                     android:weightSum="5"
                     app:layout_constraintEnd_toEndOf="parent"
