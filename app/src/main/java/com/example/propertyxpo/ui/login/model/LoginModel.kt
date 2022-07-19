@@ -10,4 +10,5 @@ data class LoginModel (
 	@SerializedName("jwt") var jwt : String,
 	@SerializedName("login_id") var login_id : String,
 	@SerializedName("password") var password : String,
+	@SerializedName("erroeMsg") var errorMessage : String,
 )

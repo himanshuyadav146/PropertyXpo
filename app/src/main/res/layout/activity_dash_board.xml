@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:checkedButton="@id/rdbCid"
                         android:onCheckedChanged="@{(group, checkId)-> viewModel.onSearchTypeChanged(checkId)}"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="@id/cardSearch"
                         app:layout_constraintTop_toBottomOf="@id/cardSearch">
 
@@ -104,7 +104,7 @@
                         android:onClick="@{(v)->viewModel.onClick(DashboardViewModel.CALENDAR, (Meeting) null)}"
                         app:cardCornerRadius="16dp"
                         app:layout_constraintEnd_toEndOf="@id/cardSearch"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/cardSearch">
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/txtCurrentDate"
                             android:layout_width="wrap_content"
@@ -140,6 +140,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/meet_plan"
+                            android:textColor="@color/color_on_secondary_and_white"
+                            app:chipBackgroundColor="@color/meeting_chip_selector"
                             app:checkedIcon="@null"
                             app:chipIcon="@drawable/ic_call" />
 
@@ -149,6 +151,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/call_plan"
+                            android:textColor="@color/color_on_secondary_and_white"
+                            app:chipBackgroundColor="@color/meeting_chip_selector"
                             app:checkedIcon="@null"
                             app:chipIcon="@drawable/ic_call" />
 
@@ -158,6 +162,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/meet_done"
+                            android:textColor="@color/color_on_secondary_and_white"
+                            app:chipBackgroundColor="@color/meeting_chip_selector"
                             app:checkedIcon="@null"
                             app:chipIcon="@drawable/ic_call" />
 
@@ -167,6 +173,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/not_met"
+                            android:textColor="@color/color_on_secondary_and_white"
+                            app:chipBackgroundColor="@color/meeting_chip_selector"
                             app:checkedIcon="@null"
                             app:chipIcon="@drawable/ic_call" />
 
@@ -176,6 +184,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/call_held"
+                            android:textColor="@color/color_on_secondary_and_white"
+                            app:chipBackgroundColor="@color/meeting_chip_selector"
                             app:checkedIcon="@null"
                             app:chipIcon="@drawable/ic_call" />
 
